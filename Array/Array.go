@@ -8,7 +8,14 @@ func Example_array(){
         fmt.Printf("%s 는 맛있다.\n",fruit)
     }
 }
-
+func Example_StrCat(){
+	s:="abc"
+	ps:=&s
+	s+="def"
+	fmt.Println(s)
+	fmt.Println(*ps)
+}
 func Result(){
 	Example_array()
+	Example_StrCat()
 }
