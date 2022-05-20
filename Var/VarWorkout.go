@@ -17,7 +17,28 @@ func Q1(num int){
 // 	//하노이의 탑 
 
 // }
-func Result2 (){
 
+
+func Q2(n int) int {
+	//파보나치 수열
+	var index int
+	var last1 int
+	var last2 int
+	var result int
+
+	if n <= 2 {
+		return 1
+	}
+	last1 = 1
+	last2 = 1
+	for index = 2; index < n; index++ {
+		result = last1 + last2
+		last1 = last2
+		last2 = result
+	}
+	return result
+}
+func Result2(){
 	Q1(2)
+	fmt.Println(Q2(3))
 }
