@@ -1,6 +1,7 @@
 package String
 
 import "fmt"
+import "strconv"
 
 var(
 	start = rune(44032)//"가의 유니코드 포인트"
@@ -46,10 +47,33 @@ func Example_modifyBytes(){
 	b[2]++
 	fmt.Println(string(b))
 }
+func Example_StrCat(){
+	s:= "abc"
+	ps := &s
+	s += "def"
+	fmt.Println(s)
+	fmt.Println(*ps)
+}
+func StrNum(){
+	var i int
+	// var k int64
+	// var f float64
+	// var s string
+	var err error
+	i, err= strconv.Atoi("350")
+	// k,  err= strconv.ParseInt**("cc7fdd",16,32)
+	// k, err = strconv.ParseInt("0xcc7fdd",0,32)
+	// f, err = strconv.ParseInt***("3.14",64)
+	// s= strconv.Itoa****(340)
+	// s= strconv.FormatInt****(13402077,16)
+    fmt.Println(i,err)
+}
 func Result(){
 	Example_printBytes()
 	Example_printBytes2()
 	Example_modifyBytes()
+	Example_StrCat()
+	StrNum()
 	String()
 	fmt.Println(HasConsonanSuffix("안녕"))
 }

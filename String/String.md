@@ -45,3 +45,30 @@ func Example_printBytes2(){
 	fmt.Printf("% x\n",s)
 }
 ```
+## 문자열 잇기
+```go
+func Example_StrCat(){
+	s:= "abc"
+	ps := &s
+	s += "def"
+	fmt.Println(s)
+	fmt.Println(*ps)
+}
+```
+## 문자열 숫자로
+- strconv패키지의Atoi함수로 문자열을 정수로 변경
+- strconv패키지의ParseInt()함수로 64비트 혹은 10진수로 변경
+```go
+	var i int
+	var k int64
+	var f float64
+	var s string
+	var err error
+	i, err= strconv.Atoi("350")
+	k,  err= strconv.ParseInt**("cc7fdd",16,32)
+	k, err = strconv.ParseInt("0xcc7fdd",0,32)
+	f, err = strconv.ParseInt***("3.14",64)
+	s= strconv.Itoa****(340)
+	s= strconv.FormatInt****(13402077,16)
+    fmt.Println(i,err)
+    ```

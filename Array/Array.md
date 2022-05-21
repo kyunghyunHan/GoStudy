@@ -2,7 +2,7 @@
 - 배열과 슬라이스 모두 연속된 메모리 공간을 순차적으로 이용하는 자료구조
 
 ## 베열
-
+- 
 ```go 
 func Example_array(){
     fruits := [3]string{"사과","바나나","토마토"}
@@ -16,4 +16,57 @@ func Example_array(){
 //토마토 는 맛있다.
 ```
 
-## 
+## 슬라이스
+- 기본적으로 빈 슬라이스에는 nil값이 들어감
+```go
+var fruits []string
+```
+- 빈스트링을 n개 가지고 있는 슬라이드
+```go
+fruits :=make([]string ,n)
+```
+- 반복문을 이용하여 i번째 문자열에 접근
+```go
+fruist := make([]string,n)
+
+fruist[0]="사과"
+fruist[1]="바나나"
+fruist[2]="토마토"
+```
+- make로 크기를 잡고 만든 슬라이스에는 자료형의 기본값이 들어간다
+- 슬라이스를 자를떄는
+```go
+func Example_Sliceing(){
+	nums := []int{1,2,3,4,5}
+	fmt.Println(nums)
+	fmt.Println(nums[1:3],"nums[1:3]")
+	fmt.Println(nums[2:],"nums[2:]")
+	fmt.Println(nums[3:],"nums[3:]")
+}
+```
+## 슬라이스 덧붙이기
+- append
+```go
+fruits= append(fruits,"포도")
+```
+- 여러개 덧붙이기
+```go
+fruits= append(fruits,"포도","딸기")
+```
+- 두슬라이스 이어붙이기
+```go
+func Example_appned(){
+	f1:= []string{"사과","바나나","토마토"}
+	f2:= []string{"포도","딸기"}
+	f3:= append(f1,f2...) //이어붙이기
+	f4:= append(f1[:2],f2...)//토마토를 제외하고 이어붙이기
+
+	fmt.Println(f1,"f1")
+	fmt.Println(f2,"f2")
+	fmt.Println(f3,"f3")
+	fmt.Println(f4,"f4")
+}
+```
+## 슬라이스용량
+- 슬라이스는 연속된메모리 공간을 활용하는 것이라서 용량에 제한
+- make([]int,5)와 같이 다섯개의 빈공간으 미리 할당하거나 []int{0,0,0,0,0}과 같이 다섯개의 정로 최기화 한 경우 길이뿐만 아니라 용량도 5
