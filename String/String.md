@@ -29,3 +29,19 @@ func HasConsonanSuffix(s string) bool{
 }
 ```
 ## 바이트단위 처리
+```go
+func Example_printBytes(){
+	s:= "가나다"
+	for i := 0; i<len(s); i++{
+		fmt.Printf("%x:",s[i])
+	}
+	fmt.Println()
+}
+```
+```go
+func Example_printBytes2(){
+	s:= "가나다"
+	fmt.Printf("%x\n",s)
+	fmt.Printf("% x\n",s)
+}
+```

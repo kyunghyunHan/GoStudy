@@ -28,6 +28,7 @@ func String(){
 	}
 	
 }
+//x는 16진수 숫자형식으로
 func Example_printBytes(){
 	s:= "가나다"
 	for i := 0; i<len(s); i++{
@@ -35,8 +36,20 @@ func Example_printBytes(){
 	}
 	fmt.Println()
 }
+func Example_printBytes2(){
+	s:= "가나다"
+	fmt.Printf("%x\n",s)
+	fmt.Printf("% x\n",s)
+}
+func Example_modifyBytes(){
+	b:= []byte("가나다")
+	b[2]++
+	fmt.Println(string(b))
+}
 func Result(){
 	Example_printBytes()
+	Example_printBytes2()
+	Example_modifyBytes()
 	String()
 	fmt.Println(HasConsonanSuffix("안녕"))
 }
