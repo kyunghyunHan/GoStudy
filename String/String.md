@@ -2,6 +2,7 @@
 - 바이트들이 연속적으로 나ㄹ
 
 ## 유니코드 처리
+- 전세계 모든 문지를 일관되게 표현하기 위한 산업 표준
 ```go
 for i ,r := range "가나다" {
     fmt.Println(i,r)
@@ -46,6 +47,7 @@ func Example_printBytes2(){
 }
 ```
 ## 문자열 잇기
+- go의 문자열은 사실상 문자열에 대한 포인터와 비슷하기 떄문에 이어붙이면
 ```go
 func Example_StrCat(){
 	s:= "abc"

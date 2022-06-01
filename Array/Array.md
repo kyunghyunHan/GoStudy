@@ -70,3 +70,83 @@ func Example_appned(){
 ## 슬라이스용량
 - 슬라이스는 연속된메모리 공간을 활용하는 것이라서 용량에 제한
 - make([]int,5)와 같이 다섯개의 빈공간으 미리 할당하거나 []int{0,0,0,0,0}과 같이 다섯개의 정로 최기화 한 경우 길이뿐만 아니라 용량도 5
+```go
+func Example_SliceCap() {
+	nums := []int{1, 2, 3, 4, 5}
+
+	fmt.Println(nums)
+	fmt.Println("lens", len(nums))
+	fmt.Println("caps:", cap(nums))
+	fmt.Println()
+
+	sliced1 := nums[:3]
+	fmt.Println(sliced1)
+	fmt.Println("lens", len(sliced1))
+	fmt.Println("caps:", cap(sliced1))
+	fmt.Println()
+
+	sliced2 := nums[2:]
+	fmt.Println(sliced2)
+	fmt.Println("lens", len(sliced2))
+	fmt.Println("caps:", cap(sliced2))
+	fmt.Println()
+
+	sliced3 := nums[:4]
+	fmt.Println(sliced3)
+	fmt.Println("lens", len(sliced3))
+	fmt.Println("caps:", cap(sliced3))
+	fmt.Println()
+
+	nums[2] = 100
+	fmt.Println(nums, sliced1, sliced2, sliced3)
+}
+```
+- 용량을 미리 지정해서 생성
+- 길이는 3이지만 용량은 6
+```go
+nums := make([]int,3,5)
+
+```
+## 슬라이스의 내부 구현
+- 슬라이스는 배열을 가리키고 있는 구조체
+- 슬라이스는 시작주소, 길이 , 용량
+
+```go
+nums = append(nums,10)
+```
+## 슬라이스 복사
+
+```go
+func Example_sliceCopy() {
+	src := []int{30, 20, 50, 10, 40}
+	dest := make([]int, len(src))
+	for i := range src {
+		dest[i] = src[i]
+	}
+	fmt.Println(dest)
+}
+
+```
+- copy
+```go
+copy(dest,src)
+```
+- dest 공간이 충분하지 않은지 확인
+```go
+if n:= copy(dest,src); n!= len(src){
+	fmt.Println("복사가 덜 됫습니다")
+}
+```
+- copy로 복사하려면 다음과 같은
+```go
+src := []int{30, 20, 50, 10, 40}
+dest:= make([]int,len(src))
+copy(dest,src)
+```
+- append 이용
+```go 
+src := []int{30, 20, 50, 10, 40}
+dest:= append([]int(nil),src...)
+```
+
+## 슬라이스 삽입 및 삭제

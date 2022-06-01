@@ -2,7 +2,6 @@ package Array
 
 import (
 	"fmt"
-	"strings"
 )
 
 func Example_array() {
@@ -58,17 +57,27 @@ func Example_SliceCap() {
 	nums[2] = 100
 	fmt.Println(nums, sliced1, sliced2, sliced3)
 }
-func ExampleReadFrom() {
-	r := strings.NewReader("bill\ntom\njane\n")
-	var lines []string
-	if err := ReadFrom(r, &lines); err != nil {
-		fmt.Println(err)
+func Example_sliceCopy() {
+	src := []int{30, 20, 50, 10, 40}
+	dest := make([]int, len(src))
+	for i := range src {
+		dest[i] = src[i]
 	}
-	fmt.Println(lines)
+	fmt.Println(dest)
 }
+
+// func ExampleReadFrom() {
+// 	r := strings.NewReader("bill\ntom\njane\n")
+// 	var lines []string
+// 	if err := ReadFrom(r, &lines); err != nil {
+// 		fmt.Println(err)
+// 	}
+// 	fmt.Println(lines)
+// }
 func Result() {
 	Example_array()
 	Example_Sliceing()
 	Example_appned()
 	Example_SliceCap()
+	Example_sliceCopy()
 }
