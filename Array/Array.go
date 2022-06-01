@@ -1,6 +1,9 @@
 package Array
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func Example_array() {
 	fruits := [3]string{"사과", "바나나", "토마토"}
@@ -55,7 +58,14 @@ func Example_SliceCap() {
 	nums[2] = 100
 	fmt.Println(nums, sliced1, sliced2, sliced3)
 }
-
+func ExampleReadFrom() {
+	r := strings.NewReader("bill\ntom\njane\n")
+	var lines []string
+	if err := ReadFrom(r, &lines); err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(lines)
+}
 func Result() {
 	Example_array()
 	Example_Sliceing()
