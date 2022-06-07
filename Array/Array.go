@@ -2,6 +2,8 @@ package Array
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
 )
 
 func Example_array() {
@@ -65,6 +67,70 @@ func Example_sliceCopy() {
 	}
 	fmt.Println(dest)
 }
+func addddd() {
+	nums := make([]int, 5)
+	nums = []int{1, 2, 3, 4, 5}
+	// nums = nums[:3]
+	fmt.Println(nums[1:], "tmffkdltm")
+}
+func Eval(expr string) int {
+	var ops []string
+	var nums []int
+	pop := func() int {
+		last := nums[len(nums)-1]
+		nums = nums[:len(nums)-1]
+		return last
+	}
+	reduce := func(higher string) {
+		for len(ops) > 0 {
+			op := ops[len(ops)-1]
+			if strings.Index(higher, op) < 0 {
+				//목록에 없는 연산자 이므로 종료
+				return
+			}
+			ops = ops[:len(ops)-1]
+			if op == "(" {
+				//괄호룰 제거햇으므로 종료
+				return
+			}
+			b, a := pop(), pop()
+			switch op {
+			case "+":
+				nums = append(nums, a+b)
+			case "-":
+				nums = append(nums, a-b)
+			case "*":
+				nums = append(nums, a*b)
+			case "/":
+				nums = append(nums, a/b)
+
+			}
+
+		}
+	}
+	for _, token := range strings.Split(expr, " ") {
+		switch token {
+		case "(":
+			ops = append(ops, token)
+		case "+", "-":
+			//덧샘과 뺼셈 이상의 우선순위를 가진 사칙연산 적용
+			reduce("+-*/")
+			ops = append(ops, token)
+		case "*", "/":
+			//곱셈과 나눗셈 이상의 우선순위를 가진것은 둘뿐
+			reduce("*/")
+			ops = append(ops, token)
+		case ")":
+			//다는 괄호는 여는 괄호까지 계산하고 제거
+			reduce("+-*/(")
+		default:
+			num, _ := strconv.Atoi(token)
+			nums = append(nums, num)
+		}
+	}
+	reduce("+-*/")
+	return nums[0]
+}
 
 // func ExampleReadFrom() {
 // 	r := strings.NewReader("bill\ntom\njane\n")
@@ -80,4 +146,9 @@ func Result() {
 	Example_appned()
 	Example_SliceCap()
 	Example_sliceCopy()
+	addddd()
+	fmt.Println(Eval("5"))
+	fmt.Println(Eval("1 + 2"))
+	fmt.Println(Eval("1 - 2 + 3"))
+	fmt.Println(Eval("3 * ( ( 3 + 1 ) * 3 ) / 2"))
 }
