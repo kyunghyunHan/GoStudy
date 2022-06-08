@@ -2,8 +2,11 @@ package Array
 
 import (
 	"fmt"
+	"reflect"
+	"sort"
 	"strconv"
 	"strings"
+	"testing"
 )
 
 func Example_array() {
@@ -140,6 +143,58 @@ func Eval(expr string) int {
 // 	}
 // 	fmt.Println(lines)
 // }
+func count(s string, codeCount map[rune]int) {
+	for _, r := range s {
+		codeCount[r]++
+	}
+}
+func TestCount1(t *testing.T) {
+	codeCount := map[rune]int{}
+	count("가나다나", codeCount)
+	if !reflect.DeepEqual(
+		map[rune]int{'가': 1, '나': 2, '다': 1},
+		codeCount,
+	) {
+		t.Error("codeCount mismath:", codeCount)
+	}
+}
+
+//맵의 크기와 각각의 키와 값들을 모두 비교
+func TestCount2(t *testing.T) {
+	codeCount := map[rune]int{}
+	count("가나다나", codeCount)
+	if len(codeCount) != 3 {
+		t.Error("CodeCount:", codeCount)
+		t.Fatal("Count should be 3 but:", len(codeCount))
+	}
+	if codeCount['가'] != 1 || codeCount['나'] != 2 || codeCount['다'] != 1 {
+		t.Error("CodeCount mismatch:", codeCount)
+	}
+}
+
+//순서가 자주 변경되는 맵의 특성을 극복하기 위하여 순서대로 맵에 접근
+//지정된 키 이외에 다른키가 있는 경우를 놓치게댐
+func Example_count() {
+	codeCount := map[rune]int{}
+	count("가나다나", codeCount)
+	for _, key := range []rune{'가', '나', '다'} {
+		fmt.Println(string(key), codeCount[key])
+	}
+}
+
+//정렬
+func Example_count2() {
+	codeCount := map[rune]int{}
+	count("가나다나", codeCount)
+	var keys sort.IntSlice
+	for key := range codeCount {
+		keys = append(keys, int(key))
+	}
+	sort.Sort(keys)
+	for _, key := range keys {
+		fmt.Println(string(key), codeCount[rune(key)], "이런젠장")
+	}
+}
 func Result() {
 	Example_array()
 	Example_Sliceing()
@@ -147,6 +202,7 @@ func Result() {
 	Example_SliceCap()
 	Example_sliceCopy()
 	addddd()
+	Example_count2()
 	fmt.Println(Eval("5"))
 	fmt.Println(Eval("1 + 2"))
 	fmt.Println(Eval("1 - 2 + 3"))

@@ -187,4 +187,37 @@ a= a[:len(a)-k]
 - 함수의 호출과 반환 역시 내부적으로 스택 구현
 - 스택을 이용 사칙연산과 괄호를 이용한 간단한 정수 수식 계산기
 ## 맵
+
+- go언어에서 맵은 해시테이블로 구현
+```go
+var m map[keyType]vauleType
+```
+- 빈맵으로 취급대어 맵을 읽을수 있지만 변경할수가 없음
+- nil값을 가지고 있는 슬라이스에 appen로 덧붙일수 있는 것과 달리 맵은 일단 생성이 되어야 추가가능
+```go
+m:= make(map[keyType]valueType)
+혹은
+m:= map[keyType]valueType
+```
+- 맵에서 읽을떄는 두가지 방법
+- m[key]를 이용하여 맵의 값을 읽을수 있음
+```go
+value,ok:=m[key]
+```
+- 맵 사용
+```go
+func count(s string,codeCount map[rune]int){
+	for _,r:= range s {
+		codeCount[r]++
+	}
+}
+
+
+```
+- 맵을 range로 반복하게 되면 키와 값이 값이 나오게 댄다 하나의 변수로만 받게되면 키만 나온다
+```go
+for _,v:= range m{
+	//
+}
+```
 ## 입출력
