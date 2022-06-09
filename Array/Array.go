@@ -194,7 +194,35 @@ func Example_count2() {
 	for _, key := range keys {
 		fmt.Println(string(key), codeCount[rune(key)], "이런젠장")
 	}
+
 }
+
+//
+func hasDupeRuns(s string) bool {
+	runeSet := map[rune]bool{}
+	for _, r := range s {
+		if runeSet[r] {
+			return true
+		}
+		runeSet[r] = true
+	}
+	return false
+}
+
+//struct은 빈구조 자료향
+
+func hasDupeRuns2(s string) bool {
+	runeSet := map[rune]struct{}{}
+	for _, r := range s {
+		if _, exits := runeSet[r]; exits {
+			return true
+		}
+		runeSet[r] = struct{}{}
+	}
+	return false
+
+}
+
 func Result() {
 	Example_array()
 	Example_Sliceing()

@@ -220,4 +220,77 @@ for _,v:= range m{
 	//
 }
 ```
+```go
+func hasDupeRuns(s string) bool {
+	runeSet := map[rune]bool{}
+	for _, r := range s {
+		if runeSet[r] {
+			return true
+		}
+		runeSet[r] = true
+	}
+	return false
+}
+//struct은 빈구조 자료향
+
+func hasDupeRuns2(s string) bool {
+	runeSet := map[rune]struct{}{}
+	for _, r := range s {
+		if _, exits := runeSet[r]; exits {
+			return true
+		}
+		runeSet[r] = struct{}{}
+	}
+	return false
+
+}
+
+```
+- 맵 삭제
+```go
+delete(m,key)
+```
+- 집합 (문자열 중에 중복되어 들어가 있는 글자가 있는지 검사하는 함수)
 ## 입출력
+- 입출력은 io.Reader와 io.Wruter인터페이스와 파생된 다른 인터페이스들을 이용
+
+## 파일읽기
+- os.Open은 반환값이 둘
+```go
+f,err := os.Open(filename)
+if err != nil{
+	return err
+
+}
+defer f.Close()
+var num int
+if _,err := fmt.Fscanf(f,"$d\n",&num);err ==nil{
+	//읽은 num값 사용
+}
+```
+
+## 파일쓰기
+ ```go
+ f,err := os.Create(filename)
+ if err != nil{
+	 return nil//혹은 다른 에러처리
+ }
+ defer f.Close()
+ if _,err := fmt.Fprintf(f,"%d\n",num);err!= nil{
+	 return err
+ }
+ ```
+
+ ## 텍스트 리스트 읽고 쓰기
+ - 단순히 문자열 슬라이스를 라인별로 출력하는 함수
+ ```go
+ func WriteTo(w io.Writer, lines []string)error{
+	 for _,line := range lines{
+		 if_,err := fmt.Fprintln(w,line); err != nil{
+			 return err
+		 }
+	 }
+	 return nil
+ }
+ ```
+ 
